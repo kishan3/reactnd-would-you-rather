@@ -9,6 +9,16 @@ body {
   margin: 0 auto;
   padding: 10px;
 }
+.left{
+  float:left;
+  width:50%;
+  overflow:hidden;
+  }
+.right{
+float:left;
+width:50%;
+overflow:hidden;
+} 
 
 .nav ul {
   display: flex;
