@@ -6,8 +6,9 @@ import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
 import reducers  from './reducers'
+import middleware from './middleware'
 
-const store = createStore(reducers)
+const store = createStore(reducers, middleware)
 
 ReactDOM.render(
     <Provider store={store} >

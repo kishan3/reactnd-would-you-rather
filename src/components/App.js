@@ -1,6 +1,7 @@
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import Login from './Login'
 import Nav from './Nav'
+import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import NewQuestion from './NewQuestion'
 import Leaderboard from './Leaderboard'
@@ -8,6 +9,9 @@ import { connect } from 'react-redux'
 import React, { Component } from 'react'
 
 class App extends Component {
+  componentDidMount(){
+    this.props.dispatch(handleInitialData())
+  }
   render() {
     return (
       <Router>
@@ -28,7 +32,7 @@ class App extends Component {
 
 function mapStateToProps({authedUser}) {
   console.log(authedUser)
-  return { notloggedin : authedUser !== null }
+  return { notloggedin : authedUser === null }
 }
 
 export default connect(mapStateToProps)(App);
