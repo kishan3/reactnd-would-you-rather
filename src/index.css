@@ -22,7 +22,7 @@ overflow:hidden;
 
 .nav ul {
   display: flex;
-  background-color: peachpuff;
+  background-color: #02b3e4;
   flex-direction: row;
   justify-content: flex-start;
   text-decoration: none;
@@ -81,13 +81,13 @@ a {
 .btn {
   text-transform: uppercase;
   margin: 35px auto;
-  padding: 10px;
   border: 1px solid rgba(0,0,0,.29);
-  cursor: pointer;
-  background: #fff;
   font-size: 16px;
   width: 250px;
-  position: relative;
+  position: relative; 
+  width: 13.75rem;
+  background-color: #02ccba;
+  border: .125rem solid transparent;
 }
 
 .btn:hover {
