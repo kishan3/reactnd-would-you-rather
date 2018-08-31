@@ -4,6 +4,7 @@ import Nav from './Nav'
 import { handleInitialData } from '../actions/shared'
 import Dashboard from './Dashboard'
 import NewQuestion from './NewQuestion'
+import QuestionPage from './QuestionPage'
 import Leaderboard from './Leaderboard'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
@@ -22,6 +23,7 @@ class App extends Component {
             <Nav />
             <Route path="/" exact component={Dashboard} />
             <Route path="/leaderboard" exact component={Leaderboard} />
+            <Route path="/question/:id" exact component={QuestionPage} />
             <Route path="/new" exact component={NewQuestion} />
           </div>}
         </div>

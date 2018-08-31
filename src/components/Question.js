@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helpers'
+import { Link } from 'react-router-dom'
 
 class Question extends Component {
     render() {
         const { question } = this.props
-        const { name, avatar, text } = question
+        const { name, avatar, text, id} = question
         console.log("questionzzzzz: ", question)
         return (
-            <div className="question">
+            <Link to={`question/${id}`} className="question">
                 <img
                     src={avatar}
                     alt={`Avatar of ${name}`}
@@ -19,7 +20,7 @@ class Question extends Component {
                     <p>....{text}....</p>
                 </div>
                 <button className="btn btn-hover btn-focus">View Poll</button>
-            </div>
+            </Link>
         )
     }
 }
