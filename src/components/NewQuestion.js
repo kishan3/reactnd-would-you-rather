@@ -1,6 +1,26 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import { handleAddQuestion } from '../actions/questions'
+import Button from '@material-ui/core/Button'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,
+    },
+    input: {
+        display: 'none',
+      },
+      root: {
+          flexGrow: 1,
+      },
+      flex: {
+          flexGrow: 1,
+      },
+      menuButton: {
+          marginLeft: -12,
+          marginRight: 20,
+      },
+})
 
 class NewQuestion extends Component {
     state = {
@@ -42,7 +62,7 @@ class NewQuestion extends Component {
         // if (toHome) {
         //     return <Redirect to="/" />
         // }
-        
+        const { classes } = this.props
         return(
             <div>
                 <h3 className="center">
@@ -66,15 +86,18 @@ class NewQuestion extends Component {
                         onChange={this.handleChange}
                         className="inputarea"
                     />
-                    <button
-                        className="btn btn:hover btn:focus"
+                    <Button 
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
                         type="submit"
-                        disabled= {option_one_text === '' || option_two_text === ''}
-                    >Submit</button>
+                        disabled= {option_one_text === '' || option_two_text === ''}>
+                    Submit
+                </Button>
                 </form>
             </div>
         )
     }
 }
 
-export default NewQuestion
+export default withStyles(styles)(NewQuestion)

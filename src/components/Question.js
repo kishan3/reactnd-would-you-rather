@@ -2,35 +2,58 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helpers'
 import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button'
+import { withStyles } from '@material-ui/core/styles'
+import Avatar from '@material-ui/core/Avatar'
+
+
+const styles = theme => ({
+    button: {
+      margin: theme.spacing.unit,
+    },
+    row: {
+        display: 'flex',
+        justifyContent: 'center',
+    },
+    avatar: {
+        margin: 10,
+    },
+    bigAvatar: {
+        width: 60,
+        height: 60,
+    },
+});
+
 
 class Question extends Component {
     render() {
-        const { question } = this.props
+        const { question, classes } = this.props
         const { name, avatar, text, id} = question
-        console.log("questionzzzzz: ", question)
+        
         return (
             <Link to={`question/${id}`} className="question">
-                <img
+                <Avatar
+                    alt="Adelle Charles"
                     src={avatar}
-                    alt={`Avatar of ${name}`}
-                    className="avatar"
+                    className={classes.bigAvatar}
                 />
                 <div className="tweet-info">
                     <p>{name} asks:</p>
                     <p>....{text}....</p>
                 </div>
-                <button className="btn btn-hover btn-focus">View Poll</button>
+                <Button variant="contained" color="secondary">View Poll</Button>
             </Link>
         )
     }
 }
 
 function mapStateToProps({authedUser, users, questions}, {id}) {
+    console.log("Id: ",id)
     const question = questions[id]
-    console.log("question:", question)
+    console.log("Question: ",question)
     return {
         question: formatQuestion(question, users[question.author], authedUser)
     }
 }
 
-export default connect(mapStateToProps)(Question)
+export default withStyles(styles)(connect(mapStateToProps)(Question))

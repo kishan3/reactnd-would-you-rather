@@ -1,7 +1,26 @@
 import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { unsetAuthedUser } from '../actions/authedUser'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  flex: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
+
 
 class Nav extends Component {  
   handleLogout = (e) => {
@@ -10,35 +29,28 @@ class Nav extends Component {
   }
 
   render() {
+    const { classes } = this.props
     const user = this.props.authedUser
     return (
-      <nav className='nav'>
-        <ul>
-          <li>
-            <NavLink to='/' exact activeClassName='active'>
+      <div>
+        <AppBar position="static">
+          <Toolbar>
+            <Link to="/" variant="title" color="inherit" className={classes.flex}>
               Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/new' exact activeClassName='active'>
+            </Link>
+            <Link to="/new" variant="title" color="inherit" className={classes.flex}>
               New Question
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to='/leaderboard' exact activeClassName='active'>
+            </Link>
+            <NavLink to="/leaderboard" variant="title" color="inherit" className={classes.flex}>
               Leaderboard
             </NavLink>
-          </li>
-          <li>
-            Hello {user} !
-          </li>
-          <li className="right">
-            <NavLink to="/" onClick={this.handleLogout}>
-              Logout
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+            <Typography variant="title" color="inherit" className={classes.flex}>
+              Hello {user} !
+            </Typography>
+            <Button href="/" color="inherit" onClick={this.handleLogout}>Logout</Button>
+          </Toolbar>
+        </AppBar>
+      </div>
     )
   }
 }
@@ -48,4 +60,4 @@ function mapStateToProps({authedUser}) {
   }
 }
 
-export default connect(mapStateToProps)(Nav)
+export default withStyles(styles)(connect(mapStateToProps)(Nav))
