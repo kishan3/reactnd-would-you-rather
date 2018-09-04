@@ -48,9 +48,7 @@ class Question extends Component {
 }
 
 function mapStateToProps({authedUser, users, questions}, {id}) {
-    console.log("Id: ",id)
     const question = questions[id]
-    console.log("Question: ",question)
     return {
         question: formatQuestion(question, users[question.author], authedUser)
     }

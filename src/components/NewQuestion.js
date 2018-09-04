@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { handleAddQuestion } from '../actions/questions'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
+import { Redirect } from 'react-router-dom'
+import { connect } from 'react-redux'
 
 const styles = theme => ({
     button: {
@@ -31,7 +33,6 @@ class NewQuestion extends Component {
 
     handleChange = (e) => {
         const text = e.target.value
-        console.log(e.target.name)
         if (e.target.name === 'option_one') {
             this.setState(() => ({
                 option_one_text: text
@@ -46,29 +47,31 @@ class NewQuestion extends Component {
     }
 
     handleSubmit = (e) => {
-        e.prevenDefault()
+        e.preventDefault()
         const { option_one_text, option_two_text } = this.state
-        const { dispatch, id } = this.props
+        const { dispatch } = this.props
 
         dispatch(handleAddQuestion(option_one_text, option_two_text))
 
         this.setState(() => ({
-            text: '',
-            toHome: id ? false: true,
+            option_one_text: '',
+            option_two_text: '',
+            toHome: true,
         }))
     }
+
     render(){
         const { option_one_text, option_two_text, toHome } = this.state
-        // if (toHome) {
-        //     return <Redirect to="/" />
-        // }
         const { classes } = this.props
+        if (toHome) {
+            return <Redirect to="/" />
+        }
         return(
             <div>
                 <h3 className="center">
                     Create New Question
                 </h3>
-                <form className="new-question" onSubmit={this.handleSubmit}>
+                <form className="new-question">
                     <h4>Complete the question:</h4>
                     <h4>Would you rather:</h4>
                     <input 
@@ -86,18 +89,18 @@ class NewQuestion extends Component {
                         onChange={this.handleChange}
                         className="inputarea"
                     />
-                    <Button 
+                    <Button
                         variant="contained"
-                        color="primary"
+                        color="secondary" 
+                        onClick={this.handleSubmit}
                         className={classes.button}
-                        type="submit"
                         disabled= {option_one_text === '' || option_two_text === ''}>
                     Submit
-                </Button>
+                    </Button>
                 </form>
             </div>
         )
     }
 }
 
-export default withStyles(styles)(NewQuestion)
+export default withStyles(styles)(connect()(NewQuestion))

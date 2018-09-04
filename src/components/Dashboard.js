@@ -47,11 +47,8 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps({questions, users, authedUser}) {
-    console.log("authed: ", Object.keys(users[authedUser].answers))
     const answeredQuestionsIds = Object.keys(users[authedUser].answers)
-    console.log(answeredQuestionsIds)
     const unansweredQuestionIds = [questions].filter((q) => !answeredQuestionsIds.includes(q.id))[0]
-    console.log(unansweredQuestionIds)
     return {
         questionIds: Object.keys(unansweredQuestionIds)
     }

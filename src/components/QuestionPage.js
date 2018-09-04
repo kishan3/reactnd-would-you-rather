@@ -15,11 +15,11 @@ class QuestionPage extends Component {
 }
 
 
-function mapStateToProps({}, props) {
+function mapStateToProps({},props) {
     const { id } = props.match.params
 
     return {
-        id
+        id,
     }
 }
 

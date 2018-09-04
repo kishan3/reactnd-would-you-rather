@@ -1,4 +1,5 @@
-import { _saveQuestion } from "../utils/_DATA";
+import { _saveQuestion } from "../utils/_DATA"
+import { addQuestionToUser } from './users'
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
@@ -17,16 +18,15 @@ function addQuestion(question){
     }
 }
 
-export function handleAddQuestion (option_one, option_two) {
-    console.log(`TEXT ${option_one} TEXT ${option_two}`)
+export function handleAddQuestion (optionOneText, optionTwoText) {
     return (dispatch, getState) => {
         const { authedUser } = getState()
-
         return _saveQuestion({
-            option_one,
-            option_two,
+            optionOneText,
+            optionTwoText,
             author: authedUser
         })
         .then((question) => dispatch(addQuestion(question)))
+        .then((question) => dispatch(addQuestionToUser(question.question)))
     }
 }

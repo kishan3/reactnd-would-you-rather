@@ -23,7 +23,6 @@ const styles = theme => ({
   
 class Login extends Component {
     handleSubmit = (e) => {
-        console.log(e.target.value)
         const { dispatch } = this.props
         const AUTHED_ID = e.target.value
         dispatch(setAuthedUser(AUTHED_ID))

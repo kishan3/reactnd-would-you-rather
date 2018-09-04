@@ -38,7 +38,7 @@ class Nav extends Component {
             <Link to="/" variant="title" color="inherit" className={classes.flex}>
               Home
             </Link>
-            <Link to="/new" variant="title" color="inherit" className={classes.flex}>
+            <Link to="/add" variant="title" color="inherit" className={classes.flex}>
               New Question
             </Link>
             <NavLink to="/leaderboard" variant="title" color="inherit" className={classes.flex}>
