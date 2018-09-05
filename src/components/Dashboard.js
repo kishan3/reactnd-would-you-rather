@@ -1,46 +1,62 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
-import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
     button: {
       margin: theme.spacing.unit,
     },
-    input: {
-      display: 'none',
-    },
-    root: {
-        flexGrow: 1,
-    },
-    flex: {
-        flexGrow: 1,
-    },
-    menuButton: {
-        marginLeft: -12,
-        marginRight: 20,
-    },
 });
 
+function TabContainer(props) {
+    return (
+      <Typography component="div" style={{ padding: 8 * 3 }}>
+        {props.children}
+      </Typography>
+    );
+}
+
 class Dashboard extends Component {
+    state = {
+        value: 0,
+    }
+    handleChange = (event, value) => {
+        this.setState({ value });
+    };
     render(){
-        const { classes } = this.props
+        const { classes, questionIds, answeredQuestionsIds } = this.props
+        const { value } = this.state;
         return(
             <div className="center">
-                <Button variant="contained" className={classes.button}>
-                    Unanswered Questions
-                </Button>
-                <Button variant="contained" color="primary" className={classes.button}>
-                    Answered Questions
-                </Button>
-                <ul>
-                    {this.props.questionIds.map((id) => (
-                        <li key={id}>
-                            <Question id={id} />
-                        </li>
-                    ))}
-                </ul>
+                <Tabs value={value} onChange={this.handleChange}>
+                    <Tab label="Unanswered Questions" />
+                    <Tab label="Answered Questions" />
+                </Tabs>
+                {value === 0 && 
+                    <TabContainer>
+                        <ul>
+                            {questionIds.map((id) => (
+                                <li key={id}>
+                                    <Question id={id} />
+                                </li>
+                            ))}
+                        </ul>
+                    </TabContainer>}
+                {value === 1 && 
+                    <TabContainer>
+                        <ul>
+                            {answeredQuestionsIds.map((id) => (
+                                <li key={id}>
+                                    <Question id={id} />
+                                </li>
+                            ))}
+                        </ul>
+                    </TabContainer>}
+                
             </div>
         )
     }
@@ -48,9 +64,11 @@ class Dashboard extends Component {
 
 function mapStateToProps({questions, users, authedUser}) {
     const answeredQuestionsIds = Object.keys(users[authedUser].answers)
-    const unansweredQuestionIds = [questions].filter((q) => !answeredQuestionsIds.includes(q.id))[0]
+    const allQuestions = Object.keys(questions)
+    const unansweredQuestionIds = allQuestions.filter((q) => !answeredQuestionsIds.includes(q))
     return {
-        questionIds: Object.keys(unansweredQuestionIds)
+        questionIds: unansweredQuestionIds,
+        answeredQuestionsIds: answeredQuestionsIds
     }
 }
 
