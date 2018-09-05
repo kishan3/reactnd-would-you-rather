@@ -40,8 +40,9 @@ class Question extends Component {
                 <div className="tweet-info">
                     <p>{name} asks:</p>
                     <p>....{text}....</p>
+                    <Button className={classes.button} variant="contained" color="secondary">View Poll</Button>
                 </div>
-                <Button variant="contained" color="secondary">View Poll</Button>
+                
             </Link>
         )
     }
