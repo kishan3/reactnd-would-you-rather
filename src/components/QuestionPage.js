@@ -23,14 +23,11 @@ const styles = {
 
   
 class QuestionPage extends Component {
-    handleSubmit = (e) => {
+    handleSubmit = (e, value) => {
         e.preventDefault()
-        const { question1 } = this.props
-        const answer = e.target.textContent
-        const { dispatch } = this.props
-
+        const { question1, dispatch } = this.props
+        const answer = value
         dispatch(handleSaveAnswer(question1.id, answer))
-
     }
     render () {
         const { question1, author, classes } = this.props
@@ -55,12 +52,15 @@ class QuestionPage extends Component {
                 <Button 
                     variant="contained"
                     color="secondary"
-                    onClick={this.handleSubmit}>{question1.optionOne.text}</Button>
+                    value="optionOne"
+                    onClick={(e) => this.handleSubmit(e, "optionOne")}>{question1.optionOne.text}</Button>
                 <h3>OR</h3>
                 <Button
                     variant="contained"
                     color="secondary"
-                    onClick={this.handleSubmit}>{question1.optionTwo.text}</Button>
+                    value="optionTwo"
+                    onClick={(e) => this.handleSubmit(e, "optionTwo")}>{question1.optionTwo.text}
+                </Button>
             </div>
         )
     }

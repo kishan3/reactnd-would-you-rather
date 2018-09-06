@@ -3,6 +3,8 @@ import { _saveQuestionAnswer } from "../utils/_DATA"
 import { receiveUsers } from './users'
 import { receiveQuestions } from './questions'
 
+export const SAVE_ANSWER = 'SAVE_ANSWER'
+
 export function handleInitialData () {
     return (dispatch) => {
         return getInitialData()
@@ -13,14 +15,23 @@ export function handleInitialData () {
     }
 }
 
-export function handleSaveAnswer (question_id, answer) {
+function addAnswer(authedUser, qid, answer){
+    return {
+        type: SAVE_ANSWER,
+        authedUser,
+        qid,
+        answer,
+    }
+}
+
+export function handleSaveAnswer (qid, answer) {
     return (dispatch, getState) => {
         const { authedUser } = getState()
-        debugger;
         return _saveQuestionAnswer({
             authedUser,
-            question_id,
-            answer
+            qid,
+            answer,
         })
+        .then(dispatch(addAnswer(authedUser, qid, answer)))
     }
 }
