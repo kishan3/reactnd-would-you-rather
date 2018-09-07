@@ -28,7 +28,7 @@ class Dashboard extends Component {
         this.setState({ value });
     };
     render(){
-        const { classes, questionIds, answeredQuestionsIds } = this.props
+        const { questionIds, answeredQuestionsIds } = this.props
         const { value } = this.state;
         return(
             <div className="center">

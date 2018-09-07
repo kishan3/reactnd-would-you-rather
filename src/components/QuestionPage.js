@@ -6,6 +6,7 @@ import { handleSaveAnswer } from '../actions/shared'
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
+import ReactSvgPieChart from "react-svg-piechart"
 
 const styles = {
     card: {
@@ -21,6 +22,7 @@ const styles = {
     },
 };
 
+
   
 class QuestionPage extends Component {
     handleSubmit = (e, value) => {
@@ -28,6 +30,22 @@ class QuestionPage extends Component {
         const { question1, dispatch } = this.props
         const answer = value
         dispatch(handleSaveAnswer(question1.id, answer))
+    }
+    
+    isAnswered() {
+        const {users, authedUser, question1} = this.props
+        if(users[authedUser].answers[question1.id]){
+          return true
+        }
+        return false
+    }
+    getData() {
+        const { question1 } = this.props
+        const data = [
+            {title: question1.optionOne.text, value: question1.optionOne.votes.length, color: "#22594e"},
+            {title: question1.optionTwo.text, value: question1.optionTwo.votes.length, color: "#2f7d6d"},
+        ]
+        return data
     }
     render () {
         const { question1, author, classes } = this.props
@@ -61,19 +79,34 @@ class QuestionPage extends Component {
                     value="optionTwo"
                     onClick={(e) => this.handleSubmit(e, "optionTwo")}>{question1.optionTwo.text}
                 </Button>
+                
+                {this.isAnswered() === true ?
+                    <ReactSvgPieChart
+                        expandSize={4}
+                        shrinkOnTouchEnd={false}
+                        strokeColor="#fff"
+                        strokeLinejoin="round"
+                        strokeWidth={0}
+                        viewBoxSize={3}
+                        data={this.getData()}
+                        expandOnHover
+                    />
+                : null}
             </div>
         )
     }
 }
 
 
-function mapStateToProps({questions, users},props) {
+function mapStateToProps({questions, authedUser, users},props) {
     const { id } = props.match.params
     const question1 = questions[id]
     const author = users[question1.author]
     return {
         question1,
-        author
+        author,
+        users,
+        authedUser
     }
 }
 
