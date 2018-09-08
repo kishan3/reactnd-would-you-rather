@@ -20,14 +20,34 @@ To get started developing right away:
 |   └── manifest.json
 |   └── 404.html
 └── src
-    ├── App.css # Styles for your app. Feel free to customize this as you desire.
     ├── App.js # This is the root of your app. Contains static HTML right now.
     ├── App.test.js # Used for testing. Provided with Create React App. Testing is encouraged, but not required.
-    ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    ├── icons # Helpful images for your app. Use at your discretion.
-    │   ├── add.svg
-    │   ├── arrow-back.svg
-    │   └── arrow-drop-down.svg
+    ├── actions # Action creators for the app.
+    │   ├── authedUser.js
+    │   ├── questions.js
+    │   └── shared.js
+    |   └── users.js
+    ├── components # components for the app.
+    │   ├── App.js
+    │   ├── Dashboard.js
+    │   └── Leaderboard.js
+    |   └── Login.js
+    |   └── Nav.js
+    |   └── NewQuestion.js
+    |   └── Question.js
+    |   └── QuestionPage.js
+    ├── middleware # Middlewares for the app.
+    │   ├── index.js
+    │   ├── logger.js
+    ├── reducers # Reducers for the app.
+    │   ├── authedUser.js
+    │   ├── questions.js
+    │   └── index.js
+    |   └── users.js
+    ├── utils # Helpers for the app.
+    │   ├── _DATA.js
+    │   ├── api.js
+    │   └── helpers.js
     ├── index.css # Global styles. You probably won't need to change anything here.
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 ```
