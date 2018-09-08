@@ -1,8 +1,6 @@
 import { _saveQuestion } from "../utils/_DATA"
 import { addQuestionToUser } from './users'
-
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const ADD_QUESTION = 'ADD_QUESTION'
+import { RECEIVE_QUESTIONS, ADD_QUESTION } from './types'
 
 
 export function receiveQuestions(questions) {

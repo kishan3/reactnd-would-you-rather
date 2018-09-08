@@ -2,8 +2,7 @@ import { getInitialData } from "../utils/api"
 import { _saveQuestionAnswer } from "../utils/_DATA"
 import { receiveUsers } from './users'
 import { receiveQuestions } from './questions'
-
-export const SAVE_ANSWER = 'SAVE_ANSWER'
+import { SAVE_ANSWER } from './types'
 
 export function handleInitialData () {
     return (dispatch) => {

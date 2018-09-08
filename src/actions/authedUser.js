@@ -1,5 +1,4 @@
-export const SET_AUTHEDUSER = 'SET_AUTHEDUSER'
-export const UNSET_AUTHEDUSER = 'UNSET_AUTHEDUSER'
+import { SET_AUTHEDUSER, UNSET_AUTHEDUSER } from './types'
 
 export function setAuthedUser(id) {
     return {
