@@ -13,21 +13,25 @@ class App extends Component {
   componentDidMount(){
     this.props.dispatch(handleInitialData())
   }
+  routing() {
+    return (<Router>
+              <div className="container">
+              {this.props.notloggedin === true
+              ? <Route exact component={Login} />
+              : <div>
+                  <Nav />
+                  <Route path="/" exact component={Dashboard} />
+                  <Route path="/leaderboard" exact component={Leaderboard} />
+                  <Route path="/question/:id" exact component={QuestionPage} />
+                  <Route path="/add" exact component={NewQuestion} />
+                </div>}
+              </div>
+            </Router>
+    )
+  }
   render() {
     return (
-      <Router>
-        <div className="container">
-        {this.props.notloggedin === true
-        ? <Route exact component={Login} />
-        : <div>
-            <Nav />
-            <Route path="/" exact component={Dashboard} />
-            <Route path="/leaderboard" exact component={Leaderboard} />
-            <Route path="/question/:id" exact component={QuestionPage} />
-            <Route path="/add" exact component={NewQuestion} />
-          </div>}
-        </div>
-      </Router>
+      this.routing()
     );
   }
 }
