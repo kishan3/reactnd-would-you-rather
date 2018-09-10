@@ -6,6 +6,7 @@ import Dashboard from './Dashboard'
 import NewQuestion from './NewQuestion'
 import QuestionPage from './QuestionPage'
 import Leaderboard from './Leaderboard'
+import PageNotFound from './NotFound'
 import { connect } from 'react-redux'
 import React, { Component } from 'react'
 
@@ -24,6 +25,7 @@ class App extends Component {
                   <Route path="/leaderboard" exact component={Leaderboard} />
                   <Route path="/question/:id" exact component={QuestionPage} />
                   <Route path="/add" exact component={NewQuestion} />
+                  <Route path="/notfound" exact component={PageNotFound} />
                 </div>}
               </div>
             </Router>

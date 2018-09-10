@@ -8,6 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import ReactSvgPieChart from "react-svg-piechart"
 import { questionpagestyles } from './ComponentCSS'
+import { Redirect } from 'react-router-dom'
 
   
 class QuestionPage extends Component {
@@ -35,49 +36,55 @@ class QuestionPage extends Component {
     }
     render () {
         const { question1, author, classes } = this.props
+        console.log('question: ', question1)
         return (
             <div className="tweet-info">
                 <br/>
-                
-                <Card className={classes.card}>
-                    <CardMedia
-                        className={classes.cover}
-                        image={author.avatarURL}
-                        title={`Image for ${author.name}`}
-                    />
-                    <Typography variant="headline" component="h1">
-                        {question1.author} asks:
-                    </Typography>
-                    <Typography variant="headline" component="h3">
-                        Would You Rather:
-                    </Typography>
-                </Card>
-                <br/>
-                <Button 
-                    variant="contained"
-                    color="secondary"
-                    value="optionOne"
-                    onClick={(e) => this.handleSubmit(e, "optionOne")}>{question1.optionOne.text}</Button>
-                <h3>OR</h3>
-                <Button
-                    variant="contained"
-                    color="secondary"
-                    value="optionTwo"
-                    onClick={(e) => this.handleSubmit(e, "optionTwo")}>{question1.optionTwo.text}
-                </Button>
-                
-                {this.isAnswered() === true ?
-                    <ReactSvgPieChart
-                        expandSize={4}
-                        shrinkOnTouchEnd={false}
-                        strokeColor="#fff"
-                        strokeLinejoin="round"
-                        strokeWidth={0}
-                        viewBoxSize={3}
-                        data={this.getData()}
-                        expandOnHover
-                    />
-                : null}
+                {question1 === undefined
+                ?
+                    <Redirect to="/notfound" />
+                :
+                <div>
+                    <Card className={classes.card}>
+                        <CardMedia
+                            className={classes.cover}
+                            image={author.avatarURL}
+                            title={`Image for ${author.name}`}
+                        />
+                        <Typography variant="headline" component="h1">
+                            {question1.author} asks:
+                        </Typography>
+                        <Typography variant="headline" component="h3">
+                            Would You Rather:
+                        </Typography>
+                    </Card>
+                    <br/>
+                    <Button 
+                        variant="contained"
+                        color="secondary"
+                        value="optionOne"
+                        onClick={(e) => this.handleSubmit(e, "optionOne")}>{question1.optionOne.text}</Button>
+                    <h3>OR</h3>
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        value="optionTwo"
+                        onClick={(e) => this.handleSubmit(e, "optionTwo")}>{question1.optionTwo.text}
+                    </Button>
+                    {this.isAnswered() === true ?
+                        <ReactSvgPieChart
+                            expandSize={4}
+                            shrinkOnTouchEnd={false}
+                            strokeColor="#fff"
+                            strokeLinejoin="round"
+                            strokeWidth={0}
+                            viewBoxSize={3}
+                            data={this.getData()}
+                            expandOnHover
+                        />
+                    : null}
+                </div>
+                }
             </div>
         )
     }
@@ -87,7 +94,11 @@ class QuestionPage extends Component {
 function mapStateToProps({questions, authedUser, users},props) {
     const { id } = props.match.params
     const question1 = questions[id]
-    const author = users[question1.author]
+    var author = null;
+    console.log("question: ", question1)
+    if (question1 !== undefined) {
+        author = users[question1.author]
+    }
     return {
         question1,
         author,
