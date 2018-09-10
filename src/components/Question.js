@@ -5,24 +5,7 @@ import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import Avatar from '@material-ui/core/Avatar'
-
-
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    row: {
-        display: 'flex',
-        justifyContent: 'center',
-    },
-    avatar: {
-        margin: 10,
-    },
-    bigAvatar: {
-        width: 60,
-        height: 60,
-    },
-});
+import { questionstyles } from './ComponentCSS' 
 
 
 class Question extends Component {
@@ -55,4 +38,4 @@ function mapStateToProps({authedUser, users, questions}, {id}) {
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Question))
+export default withStyles(questionstyles)(connect(mapStateToProps)(Question))

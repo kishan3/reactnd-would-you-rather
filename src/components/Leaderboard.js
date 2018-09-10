@@ -7,17 +7,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { connect } from 'react-redux'
 import Avatar from '@material-ui/core/Avatar'
+import { leaderboardstyles } from './ComponentCSS'
 
-const styles = theme => ({
-    root: {
-      width: '100%',
-      marginTop: theme.spacing.unit * 3,
-      overflowX: 'auto',
-    },
-    table: {
-      minWidth: 700,
-    },
-});
 
 class Leaderboard extends Component {
     render(){
@@ -75,4 +66,4 @@ function mapStateToProps({users}) {
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Leaderboard))
+export default withStyles(leaderboardstyles)(connect(mapStateToProps)(Leaderboard))

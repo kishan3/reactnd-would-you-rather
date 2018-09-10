@@ -7,19 +7,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
-
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-  flex: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
-};
+import { navstyles } from './ComponentCSS'
 
 
 class Nav extends Component {  
@@ -60,4 +48,4 @@ function mapStateToProps({authedUser}) {
   }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Nav))
+export default withStyles(navstyles)(connect(mapStateToProps)(Nav))

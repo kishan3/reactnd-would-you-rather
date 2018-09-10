@@ -5,12 +5,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import Typography from '@material-ui/core/Typography'
+import { dashboardstyles } from './ComponentCSS'
 
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-});
 
 function TabContainer(props) {
     return (
@@ -72,4 +68,4 @@ function mapStateToProps({questions, users, authedUser}) {
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(Dashboard))
+export default withStyles(dashboardstyles)(connect(mapStateToProps)(Dashboard))

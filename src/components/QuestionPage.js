@@ -7,21 +7,7 @@ import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
 import ReactSvgPieChart from "react-svg-piechart"
-
-const styles = {
-    card: {
-      minWidth: 275,
-    },
-    title: {
-        marginBottom: 16,
-        fontSize: 14,
-    },
-    cover: {
-        width: 151,
-        height: 151,
-    },
-};
-
+import { questionpagestyles } from './ComponentCSS'
 
   
 class QuestionPage extends Component {
@@ -110,4 +96,4 @@ function mapStateToProps({questions, authedUser, users},props) {
     }
 }
 
-export default withStyles(styles)(connect(mapStateToProps)(QuestionPage))
+export default withStyles(questionpagestyles)(connect(mapStateToProps)(QuestionPage))

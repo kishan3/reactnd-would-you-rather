@@ -6,20 +6,8 @@ import { withStyles } from '@material-ui/core/styles'
 import Select from '@material-ui/core/Select'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
+import { loginstyles } from './ComponentCSS'
 
-const styles = theme => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    formControl: {
-      margin: theme.spacing.unit,
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing.unit * 2,
-    },
-  });
   
 class Login extends Component {
     handleSubmit = (e) => {
@@ -56,4 +44,4 @@ class Login extends Component {
     }
 }
 
-export default withStyles(styles)(connect()(Login))
+export default withStyles(loginstyles)(connect()(Login))

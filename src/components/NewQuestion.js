@@ -4,25 +4,7 @@ import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-
-const styles = theme => ({
-    button: {
-      margin: theme.spacing.unit,
-    },
-    input: {
-        display: 'none',
-      },
-      root: {
-          flexGrow: 1,
-      },
-      flex: {
-          flexGrow: 1,
-      },
-      menuButton: {
-          marginLeft: -12,
-          marginRight: 20,
-      },
-})
+import { newquestionstyles } from './ComponentCSS'
 
 class NewQuestion extends Component {
     state = {
@@ -103,4 +85,4 @@ class NewQuestion extends Component {
     }
 }
 
-export default withStyles(styles)(connect()(NewQuestion))
+export default withStyles(newquestionstyles)(connect()(NewQuestion))
