@@ -6,10 +6,9 @@ import { handleSaveAnswer } from '../actions/shared'
 import Card from '@material-ui/core/Card'
 import CardMedia from '@material-ui/core/CardMedia'
 import Typography from '@material-ui/core/Typography'
-import ReactSvgPieChart from "react-svg-piechart"
 import { questionpagestyles } from './ComponentCSS'
 import { Redirect } from 'react-router-dom'
-
+import {Doughnut} from 'react-chartjs-2'
   
 class QuestionPage extends Component {
     handleSubmit = (e, value) => {
@@ -17,6 +16,26 @@ class QuestionPage extends Component {
         const { question1, dispatch } = this.props
         const answer = value
         dispatch(handleSaveAnswer(question1.id, answer))
+    }
+
+    getChartData () {
+        const { question1 } = this.props
+        return ({
+            labels: [question1.optionOne.text, question1.optionTwo.text],
+            datasets: [{
+                label: '# of Votes',
+                data: [question1.optionOne.votes.length, question1.optionTwo.votes.length],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(255,99,132,1)',
+                    'rgba(54, 162, 235, 1)',
+                ],
+                borderWidth: 3
+            }]
+        })
     }
     
     isAnswered() {
@@ -26,17 +45,11 @@ class QuestionPage extends Component {
         }
         return false
     }
-    getData() {
-        const { question1 } = this.props
-        const data = [
-            {title: question1.optionOne.text, value: question1.optionOne.votes.length, color: "#22594e"},
-            {title: question1.optionTwo.text, value: question1.optionTwo.votes.length, color: "#2f7d6d"},
-        ]
-        return data
-    }
+
     render () {
         const { question1, author, classes } = this.props
         console.log('question: ', question1)
+        var data = this.getChartData()
         return (
             <div className="tweet-info">
                 <br/>
@@ -63,26 +76,21 @@ class QuestionPage extends Component {
                         variant="contained"
                         color="secondary"
                         value="optionOne"
+                        disabled={this.isAnswered() === true}
+                        selected={true}
                         onClick={(e) => this.handleSubmit(e, "optionOne")}>{question1.optionOne.text}</Button>
                     <h3>OR</h3>
                     <Button
                         variant="contained"
                         color="secondary"
                         value="optionTwo"
+                        disabled={this.isAnswered() === true}
                         onClick={(e) => this.handleSubmit(e, "optionTwo")}>{question1.optionTwo.text}
                     </Button>
-                    {this.isAnswered() === true ?
-                        <ReactSvgPieChart
-                            expandSize={4}
-                            shrinkOnTouchEnd={false}
-                            strokeColor="#fff"
-                            strokeLinejoin="round"
-                            strokeWidth={0}
-                            viewBoxSize={3}
-                            data={this.getData()}
-                            expandOnHover
-                        />
+                    {this.isAnswered() === true 
+                    ? <Doughnut data={data} />
                     : null}
+                    
                 </div>
                 }
             </div>
@@ -95,7 +103,6 @@ function mapStateToProps({questions, authedUser, users},props) {
     const { id } = props.match.params
     const question1 = questions[id]
     var author = null;
-    console.log("question: ", question1)
     if (question1 !== undefined) {
         author = users[question1.author]
     }

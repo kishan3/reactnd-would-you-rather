@@ -4,7 +4,10 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.0.1",
+    "chart.js": "^2.7.2",
     "react": "^16.4.2",
+    "react-chartjs": "^1.2.0",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.2",
     "react-minimal-pie-chart": "^3.3.0",
     "react-redux": "^5.0.7",
