@@ -9,7 +9,6 @@ export function receiveUsers(users) {
 
 
 export function addQuestionToUser(question){
-    console.log("Added", question)
     return {
         type: ADD_QUESTION_TO_USER,
         question

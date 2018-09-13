@@ -20,6 +20,9 @@ class QuestionPage extends Component {
 
     getChartData () {
         const { question1 } = this.props
+        if (question1 === undefined) {
+            return null
+        }
         return ({
             labels: [question1.optionOne.text, question1.optionTwo.text],
             datasets: [{
@@ -46,9 +49,17 @@ class QuestionPage extends Component {
         return false
     }
 
+    whichOptionSelected() {
+        const {users, authedUser, question1} = this.props
+        console.log("Option: ", users[authedUser].answers[question1.id])
+        if(users[authedUser].answers[question1.id]){
+          return users[authedUser].answers[question1.id]
+        }
+        return null
+    }
+
     render () {
         const { question1, author, classes } = this.props
-        console.log('question: ', question1)
         var data = this.getChartData()
         return (
             <div className="tweet-info">
@@ -72,21 +83,19 @@ class QuestionPage extends Component {
                         </Typography>
                     </Card>
                     <br/>
-                    <Button 
-                        variant="contained"
-                        color="secondary"
+                    <button
+                        className={this.whichOptionSelected() === "optionOne" ? "selection" : ""}
                         value="optionOne"
                         disabled={this.isAnswered() === true}
-                        selected={true}
-                        onClick={(e) => this.handleSubmit(e, "optionOne")}>{question1.optionOne.text}</Button>
+                        onClick={(e) => this.handleSubmit(e, "optionOne")}>{question1.optionOne.text}</button>
                     <h3>OR</h3>
-                    <Button
-                        variant="contained"
-                        color="secondary"
+                    
+                    <button
+                        className={this.whichOptionSelected() === "optionTwo" ? "selection" : ""}
                         value="optionTwo"
                         disabled={this.isAnswered() === true}
                         onClick={(e) => this.handleSubmit(e, "optionTwo")}>{question1.optionTwo.text}
-                    </Button>
+                    </button>
                     {this.isAnswered() === true 
                     ? <Doughnut data={data} />
                     : null}
