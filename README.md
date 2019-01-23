@@ -3,7 +3,7 @@
 This is the react nanodegree project where it is a polling website.
 
 ## Live Demo
-[Would You Rather](https://gracious-poitras-9d0486.netlify.com/)
+[Would You Rather](https://ratherwouldyou.tk/)
 
 ## TL;DR
 
