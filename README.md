@@ -2,6 +2,9 @@
 
 This is the react nanodegree project where it is a polling website.
 
+## Live Demo
+[Would You Rather](https://ratherwouldyou.tk/)
+
 ## TL;DR
 
 To get started developing right away:
